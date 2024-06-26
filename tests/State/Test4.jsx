@@ -35,21 +35,23 @@ const PersonContext = createContext();
 
 //This is your context provider component
 function Context({ children }) {
-  const BaseContext = {
-    name: "",
-    age: "",
-    height: "",
-    complexion: "",
-  };
+  const [person, setPerson] = useState({
+    name: "jgrt",
+    age: "23",
+    height: "5'8",
+    complexion: "Brown",
+  });
 
-  const person = BaseContext;
-
-  return <PersonContext.Provider value={{}}>{children}</PersonContext.Provider>;
+  return (
+    <PersonContext.Provider value={{ person, setPerson }}>
+      {children}
+    </PersonContext.Provider>
+  );
 }
 
 //set values here.
 function SetterComponent() {
-  const setPerson = () => undefined;
+  const { setPerson } = useContext(PersonContext);
 
   const newPerson = {
     name: "Jrue Holiday",
@@ -66,7 +68,7 @@ function SetterComponent() {
         height: 60,
         borderRadius: 2.725,
       }}
-      onClick={() => setPerson()}
+      onClick={() => setPerson(newPerson)}
     >
       Set
     </button>
@@ -75,8 +77,9 @@ function SetterComponent() {
 
 //access and display 'person' details here.
 function Screen() {
-  const person = "Jordan Ripley";
+  const { person } = useContext(PersonContext);
 
+  console.log(person);
   return (
     <div className="testContainer">
       <div className="stateComp">
@@ -89,5 +92,9 @@ function Screen() {
 
 //default component.
 export default function Test4Screen() {
-  return <Screen />;
+  return (
+    <Context>
+      <Screen />
+    </Context>
+  );
 }

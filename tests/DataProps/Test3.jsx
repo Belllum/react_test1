@@ -33,10 +33,13 @@ export default function Test3Screen() {
   return (
     <div className="testContainer">
       <div className="test4">
-
         <span> Details: </span>
         <ul>
-          <li> Name: {people.name} </li>
+          {Object.keys(people).map((key) => (
+            <li key={key}>
+              {key}: {people[key]}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

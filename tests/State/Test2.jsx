@@ -27,25 +27,35 @@
 
 // ----------------------------------------------------------------------------------//
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography } from "@mui/material";
 
 export default function Test2Screen() {
-  var color = "LEMONCHIFFON";
-  var color2 = "CORAL";
+  const [color, setColor] = useState("lemonchiffon");
 
+  const handleOnClick = (e) => {
+    setColor((prevColor) =>
+      prevColor === "lemonchiffon" ? "coral" : "lemonchiffon"
+    );
+  };
+
+  const backgroundColor = color === "lemonchiffon" ? "coral" : "lemonchiffon";
   return (
     <div className="testContainer">
       <div className="stateComp">
         <Typography
           variant="h2"
           component={"h2"}
-          sx={{ p: 3, backgroundColor: color }}
+          sx={{ p: 3, backgroundColor: backgroundColor }}
         >
-          Lemonchiffon
+          {color}
         </Typography>
 
-        <Button variant="contained" onClick={() => (color = "coral")} sx={{width: '50%'}}>
+        <Button
+          variant="contained"
+          onClick={handleOnClick}
+          sx={{ width: "50%" }}
+        >
           Toggle
         </Button>
       </div>

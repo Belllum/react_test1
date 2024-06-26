@@ -27,7 +27,7 @@ import React from "react";
 
 // eslint-disable-next-line react/prop-types
 
-function Test1() {
+function Test1({ props }) {
   const styles = {
     header: {
       color: "black",
@@ -43,13 +43,13 @@ function Test1() {
     },
   };
 
-  return <h1 style={styles.header}> Show props here </h1>;
+  return <h1 style={styles.header}> {props} </h1>;
 }
 
 export default function Test1Screen() {
   return (
-    <div style={{padding: 12}}>
-      <Test1 />
+    <div style={{ padding: 12 }}>
+      <Test1 props={"Hello World!"} />
     </div>
   );
 }

@@ -32,23 +32,34 @@ import { useState, useEffect } from "react";
 
 //default component.
 export default function Test5Screen() {
+  const [loading, setLoading] = useState(false);
+
   function mockRequest() {
-    setTimeout(() => {}, 1500);
+    //set loading to true after clicking then after 1.5sec it will turn into a button again
+    setLoading(true);
+    setTimeout(() => {
+      console.log("mockRequest completed");
+      setLoading(false);
+    }, 1500);
   }
   return (
     <div className="testContainer">
       <div className="stateComp">
-        <button
-          onClick={mockRequest}
-          style={{
-            backgroundColor: "rgb(254 215 170)",
-            width: 200,
-            height: 60,
-            borderRadius: 2.725,
-          }}
-        >
-          Send Request
-        </button>
+        {!loading ? (
+          <button
+            onClick={mockRequest}
+            style={{
+              backgroundColor: "rgb(254 215 170)",
+              width: 200,
+              height: 60,
+              borderRadius: 2.725,
+            }}
+          >
+            Send Request
+          </button>
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );
